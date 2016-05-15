@@ -24,7 +24,7 @@ import org.lababidy.visitor.hibernate.Course;
  * @author Mohannad Lababidy <m.lababidy@gmail.com>
  */
 @Stateless
-@Path("org.lababidy.visitor.hibernate.course")
+@Path("course")
 public class CourseFacadeREST extends AbstractFacade<Course> {
     @PersistenceContext(unitName = "org.lababidy_visitor-hibernate_war_2PU")
     private EntityManager em;

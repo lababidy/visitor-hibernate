@@ -15,6 +15,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
+import javax.persistence.NamedNativeQueries;
+import javax.persistence.NamedNativeQuery;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -31,9 +33,19 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "course")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Course.findAll", query = "SELECT c FROM Course c"),
-    @NamedQuery(name = "Course.findByCid", query = "SELECT c FROM Course c WHERE c.cid = :cid"),
-    @NamedQuery(name = "Course.findByCname", query = "SELECT c FROM Course c WHERE c.cname = :cname")})
+    @NamedQuery(name = "Course.findAllCource", query = "SELECT c FROM Course c Order By c.cid "),
+    @NamedQuery(name = "Course.findByCid", query = "SELECT c FROM Course c WHERE c.cid like :cid% "),
+    @NamedQuery(name = "Course.findByCname", query = "SELECT c FROM Course c WHERE c.cname like :cname%")})
+@NamedNativeQueries({
+    @NamedNativeQuery(name = "Course.listCourseNames", query = "SELECT cname FROM course ORDER BY cname"),
+    @NamedNativeQuery(name = "Course.findLikeCname", query = "SELECT * FROM course as e "
+            + "WHERE UPPER(name) LIKE ? "
+            + "ORDER BY cname"),
+    @NamedNativeQuery(name = "Course.insertCource", query = "INSERT INTO course (cname,cnotes) VALUES (?, ?)"),
+    @NamedNativeQuery(name = "Course.UpdataCource", query = "UPDATE course SET cname=?,cnotes=? WHERE cid=?"),
+    @NamedNativeQuery(name = "Course.deleteCource", query = "DELETE FROM course WHERE cid=?")
+
+})
 public class Course implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

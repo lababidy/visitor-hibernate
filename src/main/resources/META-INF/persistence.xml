@@ -3,10 +3,10 @@
   <persistence-unit name="org.lababidy_visitor-hibernate_war_2PU" transaction-type="JTA">
     <jta-data-source>java:/jboss/datasources/visitor</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    
     <properties>
         <property name="hibernate.show_sql" value="true"/>
         <property name="hibernate.generate_statistics" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>
