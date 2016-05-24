@@ -34,8 +34,8 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Course.findAllCource", query = "SELECT c FROM Course c Order By c.cid "),
-    @NamedQuery(name = "Course.findByCid", query = "SELECT c FROM Course c WHERE c.cid like :cid% "),
-    @NamedQuery(name = "Course.findByCname", query = "SELECT c FROM Course c WHERE c.cname like :cname%")})
+    @NamedQuery(name = "Course.findByCid", query = "SELECT c FROM Course c WHERE c.cid like CONCAT('%',cid,'%')"),
+    @NamedQuery(name = "Course.findByCname", query = "SELECT c FROM Course c WHERE c.cname like CONCAT('%',cname,'%')")})
 @NamedNativeQueries({
     @NamedNativeQuery(name = "Course.listCourseNames", query = "SELECT cname FROM course ORDER BY cname"),
     @NamedNativeQuery(name = "Course.findLikeCname", query = "SELECT * FROM course as e "
